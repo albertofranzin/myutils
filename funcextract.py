@@ -43,10 +43,10 @@ def python_extract(filename):
 def r_extract(filename):
     functions = []
     restext = [line.rstrip('\n').lstrip() for line in open(filename)]
-    row_indices = [i for i in range(len(restext)) if "<- function" in restext[i]]
+    row_indices = [i for i in range(len(restext)) if "<- function" in restext[i] or "= function" in restext[i]]
     if len(row_indices) > 0:
         for ri in row_indices:
-            functions.extend([restext[ri].split("<- function")[0].split("#")[0].rstrip(' ')])
+            functions.extend([restext[ri].split("function")[0].lstrip().split(' ')[0].split("#")[0].rstrip(' ')])
     functions = [el for el in functions if el != '']
     return functions
 
